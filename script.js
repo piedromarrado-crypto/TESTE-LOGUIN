@@ -1,25 +1,11 @@
-// Alterna entre TODAS as abas do sistema (Cadastro, Login, Bem-vindo e Perfil)
+// Altera as abas ocultando as outras
 function mostrarAba(aba) {
-  // Oculta todas as abas removendo a classe "ativa"
   document.getElementById("cadastro").classList.remove("ativa");
   document.getElementById("login").classList.remove("ativa");
   document.getElementById("bemVindo").classList.remove("ativa");
   document.getElementById("perfil").classList.remove("ativa");
   
-  // Mostra apenas a aba desejada
   document.getElementById(aba).classList.add("ativa");
-
-  // Controla se a barra superior de Cadastro/Login deve aparecer
-  const menuNavegacao = document.getElementById("navegacaoAbas");
-  if (aba === "cadastro" || aba === "login") {
-    menuNavegacao.style.display = "flex"; 
-    document.getElementById("btnCadastro").classList.remove("active");
-    document.getElementById("btnLogin").classList.remove("active");
-    if(aba === "cadastro") document.getElementById("btnCadastro").classList.add("active");
-    else document.getElementById("btnLogin").classList.add("active");
-  } else {
-    menuNavegacao.style.display = "none"; // Esconde o menu de abas iniciais se o usuário estiver logado
-  }
 }
 
 // Cadastro com checagem de duplicados
@@ -44,14 +30,15 @@ document.getElementById("cadastroForm").addEventListener("submit", function(e){
   users.push(user);
   localStorage.setItem("users", JSON.stringify(users));
 
-  alert("Cadastro realizado! Seu ID é: " + id);
+  alert("Cadastro realizado com sucesso!\nSeu ID gerado é: " + id);
   document.getElementById("cadastroForm").reset();
-  mostrarAba("login"); // Joga o usuário direto para a tela de login
+  
+  // Após cadastrar com sucesso, manda ele de volta para o Login fazer o primeiro acesso
+  mostrarAba("login");
 });
 
-// Preenche a interface com os dados do usuário e troca de tela
+// Preenche os dados nas telas após o login
 function logarUsuario(user) {
-  // Injeta os dados nas telas de Bem-vindo e Perfil
   document.getElementById("txtMenuBemVindo").innerText = `Bem-vindo, ${user.nome}`;
   document.getElementById("tituloBoasVindas").innerText = `Olá ${user.nome}!`;
   
@@ -61,46 +48,67 @@ function logarUsuario(user) {
   document.getElementById("perfCelular").innerText = user.celular;
   document.getElementById("perfId").innerText = user.id;
 
-  // Vai para a tela de Boas-vindas
   mostrarAba("bemVindo");
 }
 
-// Realiza o logout limpando os formulários
+// Executa o logout limpando campos
 function logout() {
   document.getElementById("loginForm").reset();
   document.getElementById("loginCpfForm").reset();
   mostrarAba("login");
 }
 
-// Login com ID
+// Login com ID + Automação de Cadastro
 document.getElementById("loginForm").addEventListener("submit", function(e){
   e.preventDefault();
   const loginId = document.getElementById("loginId").value;
   const loginSenha = document.getElementById("loginSenha").value;
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
+  // 1º passo: Verifica se o ID inserido existe no banco de dados geral
+  const idExiste = users.some(u => u.id == loginId);
+  
+  if (!idExiste) {
+    // Se o ID não existe em nenhum lugar do banco, avisa que precisa de cadastro e redireciona
+    alert("Conta não encontrada! É necessário realizar um cadastro.");
+    mostrarAba("cadastro");
+    return;
+  }
+
+  // 2º passo: Se o ID existe, confere se bate com a senha correta
   const user = users.find(u => u.id == loginId && u.senha === loginSenha);
 
   if(user){
     logarUsuario(user);
   } else {
-    alert("ID ou senha incorretos!");
+    alert("Senha incorreta para este ID!");
   }
 });
 
-// Login com CPF
+// Login com CPF + Automação de Cadastro
 document.getElementById("loginCpfForm").addEventListener("submit", function(e){
   e.preventDefault();
   const loginCpf = document.getElementById("loginCpf").value;
   const loginCpfSenha = document.getElementById("loginCpfSenha").value;
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
+  // 1º passo: Verifica se o CPF inserido existe no banco de dados geral
+  const cpfExiste = users.some(u => u.cpf === loginCpf);
+
+  if (!cpfExiste) {
+    // Se o CPF não existe, avisa que precisa de cadastro e joga para o formulário
+    alert("CPF não localizado no sistema! Por favor, realize o seu cadastro.");
+    mostrarAba("cadastro");
+    return;
+  }
+
+  // 2º passo: Se existe, valida a credencial da senha
   const user = users.find(u => u.cpf === loginCpf && u.senha === loginCpfSenha);
 
   if(user){
-    alert("Login realizado! Seu ID é: " + user.id);
+    alert("Login realizado com sucesso!");
     logarUsuario(user);
   } else {
-    alert("CPF ou senha incorretos!");
+    alert("Senha incorreta para este CPF!");
   }
 });
