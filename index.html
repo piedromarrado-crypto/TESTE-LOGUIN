@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Login TESTE1</title>
-  <link rel="stylesheet" href="estilo.css"> </head>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
   <div class="container">
     
@@ -49,29 +50,29 @@
     </div>
 
     <div id="bemVindo" class="aba">
-      <div class="menu-interno" style="background:#333; color:white; padding:15px; display:flex; justify-content:space-between; border-radius:5px;">
+      <div class="menu-interno">
         <div id="txtMenuBemVindo">Bem-vindo</div>
         <div>
-          <button onclick="mostrarAba('perfil')" style="background:#66a6ff; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; color:white;">Perfil</button>
-          <button onclick="logout()" style="background:#ff6b6b; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; color:white; margin-left:10px;">Logout</button>
+          <button onclick="mostrarAba('perfil')">Perfil</button>
+          <button onclick="logout()" style="background:#ff6b6b;">Sair</button>
         </div>
       </div>
-      <div class="conteudo" style="text-align:center; margin-top:50px; color:#333;">
+      <div class="conteudo" style="margin-top: 40px;">
         <h1 id="tituloBoasVindas">Olá!</h1>
-        <p>Você entrou com sucesso.</p>
+        <p>Você entrou com sucesso no sistema.</p>
       </div>
     </div>
 
     <div id="perfil" class="aba">
-      <div class="card" style="background:white; padding:20px; border-radius:10px; box-shadow:0px 4px 10px rgba(0,0,0,0.1); max-width:400px; margin:20px auto;">
-        <h2>Perfil do Usuário</h2>
+      <h2>Perfil do Usuário</h2>
+      <div class="perfil-dados">
         <p><strong>Nome:</strong> <span id="perfNome"></span></p>
         <p><strong>CPF:</strong> <span id="perfCpf"></span></p>
         <p><strong>Email:</strong> <span id="perfEmail"></span></p>
         <p><strong>Celular:</strong> <span id="perfCelular"></span></p>
         <p><strong>ID:</strong> <span id="perfId"></span></p>
-        <button onclick="mostrarAba('bemVindo')" style="background:#66a6ff; color:white; border:none; padding:10px 20px; margin-top:20px; border-radius:5px; cursor:pointer;">Voltar</button>
       </div>
+      <button onclick="mostrarAba('bemVindo')" style="width: 100%;">Voltar</button>
     </div>
 
   </div>
