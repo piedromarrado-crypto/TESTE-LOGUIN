@@ -3,29 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Login TESTE1</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <link rel="stylesheet" href="estilo.css"> </head>
 <body>
   <div class="container">
     
-    <div id="navegacaoAbas" class="tabs">
-      <button onclick="mostrarAba('cadastro')" id="btnCadastro" class="active">Cadastro</button>
-      <button onclick="mostrarAba('login')" id="btnLogin">Login</button>
-    </div>
-
-    <div id="cadastro" class="aba ativa">
-      <h2>Cadastro</h2>
-      <form id="cadastroForm">
-        <input type="text" id="nome" placeholder="Nome" required><br>
-        <input type="text" id="cpf" placeholder="CPF" required><br>
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="text" id="celular" placeholder="Celular" required><br>
-        <input type="password" id="senha" placeholder="Senha" required><br>
-        <button type="submit">Cadastrar</button>
-      </form>
-    </div>
-
-    <div id="login" class="aba">
+    <div id="login" class="aba ativa">
       <h2>Login</h2>
       <form id="loginForm">
         <input type="text" id="loginId" placeholder="ID"><br>
@@ -39,6 +21,31 @@
         <input type="password" id="loginCpfSenha" placeholder="Senha" required><br>
         <button type="submit">Entrar com CPF</button>
       </form>
+
+      <p style="margin-top: 25px; font-size: 14px; color: #666;">
+        Não tem uma conta? 
+        <span onclick="mostrarAba('cadastro')" style="color: #66a6ff; cursor: pointer; text-decoration: underline; font-weight: bold;">
+          Cadastre-se aqui
+        </span>
+      </p>
+    </div>
+
+    <div id="cadastro" class="aba">
+      <h2>Cadastro</h2>
+      <form id="cadastroForm">
+        <input type="text" id="nome" placeholder="Nome" required><br>
+        <input type="text" id="cpf" placeholder="CPF" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="text" id="celular" placeholder="Celular" required><br>
+        <input type="password" id="senha" placeholder="Senha" required><br>
+        <button type="submit">Cadastrar</button>
+      </form>
+      
+      <p style="margin-top: 20px; font-size: 14px;">
+        <span onclick="mostrarAba('login')" style="color: #999; cursor: pointer; text-decoration: underline;">
+          Voltar para o Login
+        </span>
+      </p>
     </div>
 
     <div id="bemVindo" class="aba">
