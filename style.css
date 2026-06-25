@@ -15,9 +15,10 @@ body {
   box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
   width: 350px;
   text-align: center;
+  transition: all 0.3s ease;
 }
 
-h2, h3 { color: #333; }
+h2, h3 { color: #333; margin-top: 0; }
 
 input {
   width: 90%;
@@ -25,6 +26,7 @@ input {
   margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box; /* Garante que o input não passe do tamanho da caixa */
 }
 
 button {
@@ -36,6 +38,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: bold;
 }
 
 button:hover {
@@ -43,42 +46,55 @@ button:hover {
   color: #333;
 }
 
-.tabs { margin-bottom: 20px; }
-
-.tabs button {
-  background: #eee;
-  color: #333;
-  margin: 0 5px;
-}
-
-.tabs button.active {
-  background: #66a6ff;
-  color: white;
-}
-
-/* --- Controle de Abas (Suas regras originais) --- */
+/* --- Controle de Abas (Invisível/Visível) --- */
 .aba { display: none; }
 .ativa { display: block; }
 
-/* --- Estilos Extras para as Telas de Logado --- */
+/* --- Design Estiloso para as telas de Bem-vindo e Perfil --- */
 
-/* Alinha as informações do perfil à esquerda para ficar mais organizado */
-#perfil .card p {
-  text-align: left;
-  background: #f9f9f9;
-  padding: 8px;
-  border-radius: 5px;
-  margin: 5px 0;
-  color: #555;
+.menu-interno {
+  background: linear-gradient(120deg, #333, #222);
+  color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-#perfil .card p strong {
-  color: #333;
-}
-
-/* Deixa os botões internos alinhados corretamente */
 .menu-interno button {
   margin-top: 0;
   padding: 6px 12px;
+  font-size: 12px;
+}
+
+.conteudo h1 {
+  color: #66a6ff;
+  margin-bottom: 5px;
+}
+
+.conteudo p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* Estilização das linhas do Perfil */
+.perfil-dados {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.perfil-dados p {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 6px 0;
+  border-left: 4px solid #66a6ff;
   font-size: 14px;
+  color: #555;
+}
+
+.perfil-dados strong {
+  color: #333;
 }
